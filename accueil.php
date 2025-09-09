@@ -5,14 +5,18 @@
 			<title>Git en local</title>
 		</head>
 		<body>
-			<h1>Bonjour</h1>
-			
 			<?php
-				if (isset($_GET["nom"]) && isset($_GET["prenom"])) {
-					$nom = $_GET["nom"];
-					$prenom = $_GET["prenom"];
+				if ($_GET["login"] == "admin" && $_GET["mdp"] == "azerty") {
+					$login = $_GET["login"];
 
-					echo "<h2>".$nom." ".$prenom."</h2>";
+					echo "
+						<h1>Bonjour</h1>
+						<h2>".$login."</h2>
+					";
+				} else {
+					$host = $_SERVER['HTTP_HOST']; // on récupère le nom de l’hôte 
+					$uri = rtrim(dirname($_SERVER['PHP_SELF']), '/\\'); // on récupère le début de l’URL 
+					header("Location: http://$host$uri/index.html"); // on redirige vers l’URL, en complétant les "..."
 				}
 			?>
 		</body>
